@@ -48,8 +48,8 @@ class Particle {
    }
    draw() {
       ctx.beginPath();
-      let c = floor(((zoff * 80) % (255 - baseHue)) + baseHue) % 256;
-      ctx.strokeStyle = "hsla(" + c + ",50%,50%,0.082)";
+      let c = (floor(zoff * 50) + baseHue) % 360;
+      ctx.strokeStyle = "hsla(" + c + ",100%,50%,0.082)";
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(this.px, this.py);
       ctx.stroke();

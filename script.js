@@ -3,7 +3,7 @@ var cols, rows, field, particles, zoff;
 const size = 10,
    r = 1,
    maxSpeed = 5;
-var baseHue = random(0, 255);
+var baseHue = random(0, 360);
 var inc = 0.0026;
 const { floor, sin, cos, PI, abs } = Math;
 
