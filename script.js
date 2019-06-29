@@ -1,8 +1,7 @@
 var canvas, ctx, w, h;
-var cols, rows, field, particles, zoff;
-const size = 10,
-   r = 1,
-   maxSpeed = 5;
+var cols, rows, field, particles, zoff, size;
+const r = 1,
+   maxSpeed = 2;
 var baseHue = random(0, 360);
 var inc = 0.0026;
 const { floor, sin, cos, PI, abs } = Math;
@@ -19,9 +18,12 @@ function init() {
    ctx = canvas.getContext("2d");
    w = canvas.width = window.innerWidth;
    h = canvas.height = window.innerHeight;
+
    ctx.strokeStyle = "white";
-   ctx.lineWidth = 2;
+   ctx.lineWidth = 1;
    ctx.lineCap = "round";
+
+   size = w > 800 ? 6 : 3;
 
    //to get fps
    current = Date.now();
@@ -35,7 +37,7 @@ function init() {
    zoff = 0;
 
    //to make number of particles according to the size of screen
-   let num = floor((w * h) / 900);
+   let num = floor((w * h) / 400);
    for (let i = 0; i < num; i++) {
       particles.push(new Particle());
    }
@@ -49,6 +51,14 @@ function init() {
 
    //drawing function
    draw();
+
+   //to erase the canvas partially
+   setInterval(function() {
+      //console.log("jdjd");
+      ctx.rect(0, 0, w, h);
+      ctx.fillStyle = "rgba(26,26,26,0.35)";
+      ctx.fill();
+   }, 500 * 60);
 }
 
 function draw() {
