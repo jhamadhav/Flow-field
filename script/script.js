@@ -6,11 +6,12 @@ var baseHue = random(0, 360);
 var inc = 0.0026;
 const { floor, sin, cos, PI, abs } = Math;
 
-//event listeners for onlaod & resize
+//event listeners for onload & resize
 window.addEventListener("resize", init);
 window.addEventListener("load", init);
+window.addEventListener("dblclick", toggleFullScreen);
 
-//initial funtion
+//initial function
 function init() {
    //setting things up
    time = Date.now();
@@ -42,7 +43,7 @@ function init() {
       particles.push(new Particle());
    }
 
-   // to calculate flow field in the begining
+   // to calculate flow field
    for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
          updateField(x, y);
@@ -54,7 +55,6 @@ function init() {
 
    //to erase the canvas partially
    setInterval(function() {
-      //console.log("jdjd");
       ctx.rect(0, 0, w, h);
       ctx.fillStyle = "rgba(26,26,26,0.35)";
       ctx.fill();
@@ -117,4 +117,15 @@ function calcFPS() {
    current = Date.now();
 
    fps.innerText = "fps: " + Math.floor(1000 / timeDiff);
+}
+
+//function to toggle fullscreen
+function toggleFullScreen() {
+   if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+   } else {
+      if (document.exitFullscreen) {
+         document.exitFullscreen();
+      }
+   }
 }
